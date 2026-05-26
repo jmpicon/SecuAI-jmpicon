@@ -1,0 +1,121 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: secuai-backend:latest
+    container_name: secuai-backend
+    restart: unless-stopped
+    volumes:
+      - ./Modulo1:/content/Modulo1:ro
+      - ./Modulo2:/content/Modulo2:ro
+      - ./Modulo3:/content/Modulo3:ro
+      - ./Modulo4:/content/Modulo4:ro
+      - ./Modulo5:/content/Modulo5:ro
+      - ./Modulo6:/content/Modulo6:ro
+      - ./Modulo7:/content/Modulo7:ro
+      - ./Modulo8:/content/Modulo8:ro
+      - ./Modulo9:/content/Modulo9:ro
+      - ./Modulo10:/content/Modulo10:ro
+      - ./taller:/content/taller:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CONTENT_DIR=/content
+      - SECRET_KEY=${SECRET_KEY:-changeme-set-in-production-32chars!}
+      - ACCESS_CODE=${ACCESS_CODE:-secuai2026}
+      - SESSION_TTL=86400
+    networks:
+      - secuai
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+
+  tools:
+    build:
+      context: ./tools
+      dockerfile: Dockerfile
+    image: secuai-tools:latest
+    container_name: secuai-tools
+    restart: unless-stopped
+    networks:
+      - secuai
+    security_opt:
+      - no-new-privileges:true
+    read_only: false
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_RAW
+      - NET_BIND_SERVICE
+    mem_limit: 2g
+    cpus: "2.0"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:7681"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  lab-prompt-injection:
+    build:
+      context: ./labs/prompt-injection
+      dockerfile: Dockerfile
+    image: secuai-lab-pi:latest
+    container_name: secuai-lab-pi
+    restart: unless-stopped
+    networks:
+      - secuai
+    mem_limit: 512m
+
+  lab-rag-poisoning:
+    build:
+      context: ./labs/rag-poisoning
+      dockerfile: Dockerfile
+    image: secuai-lab-rag:latest
+    container_name: secuai-lab-rag
+    restart: unless-stopped
+    networks:
+      - secuai
+    mem_limit: 512m
+
+  lab-model-extraction:
+    build:
+      context: ./labs/model-extraction
+      dockerfile: Dockerfile
+    image: secuai-lab-extract:latest
+    container_name: secuai-lab-extract
+    restart: unless-stopped
+    networks:
+      - secuai
+    mem_limit: 512m
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: secuai-frontend:latest
+    container_name: secuai-frontend
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8090}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+      tools:
+        condition: service_healthy
+    networks:
+      - secuai
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  secuai:
+    driver: bridge
+    name: secuai-net

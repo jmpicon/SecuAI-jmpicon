@@ -1,0 +1,51 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Docker
+*.log
+
+# Claude
+.claude/
+
+# Contenido binario del curso (PDFs/PPTX — se añaden manualmente)
+Modulo*/*.pdf
+Modulo*/*.pptx
+Modulo*/*.docx
+
+# Modelos descargados en labs (pueden ser GB)
+labs/**/models/
+labs/**/.cache/
+labs/**/data/raw/
+
+# Documentos locales
+*.docx
+*.pptx
+
+# Excepción: PPTX final del taller (entregable público)
+!taller/SecuAI_Hackeando_la_IA.pptx
