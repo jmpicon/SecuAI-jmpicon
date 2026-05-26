@@ -47,5 +47,6 @@ labs/**/data/raw/
 *.docx
 *.pptx
 
-# Excepción: PPTX final del taller (entregable público)
+# Excepción: PPTX entregables del taller
 !taller/SecuAI_Hackeando_la_IA.pptx
+!taller/SecuAI_Tools_Workshop.pptx
