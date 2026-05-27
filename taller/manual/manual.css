@@ -1,462 +1,327 @@
 /* ============================================
-   SecuAI · Manual de Herramientas
-   Estilo profesional para PDF
+   Manual técnico — estilo libro
+   Sin colores. Tipografía clásica.
    ============================================ */
 
 @page {
     size: A4;
-    margin: 18mm 16mm 22mm 16mm;
+    margin: 22mm 20mm 22mm 22mm;
 
-    @top-left {
-        content: "SecuAI · Manual de Herramientas";
-        font-family: 'Inter', sans-serif;
-        font-size: 8.5pt;
-        color: #6b7280;
-    }
     @top-right {
-        content: "José Picón · 2026";
-        font-family: 'Inter', sans-serif;
-        font-size: 8.5pt;
-        color: #6b7280;
+        content: "Manual SecuAI — Herramientas para atacar y defender sistemas de IA";
+        font-family: 'Charter', 'Source Serif Pro', Georgia, serif;
+        font-size: 9pt;
+        color: #555;
+        font-style: italic;
     }
     @bottom-center {
-        content: counter(page) " / " counter(pages);
-        font-family: 'Inter', sans-serif;
-        font-size: 9pt;
-        color: #6b7280;
-    }
-    @bottom-right {
-        content: string(chapter-name);
-        font-family: 'Inter', sans-serif;
-        font-size: 8.5pt;
-        color: #00aacc;
-        font-weight: bold;
+        content: counter(page);
+        font-family: 'Charter', 'Source Serif Pro', Georgia, serif;
+        font-size: 10pt;
+        color: #333;
     }
 }
 
 @page :first {
-    @top-left { content: none; }
     @top-right { content: none; }
     @bottom-center { content: none; }
-    @bottom-right { content: none; }
-    margin: 0;
-}
-
-@page chapter-start {
-    @top-left { content: none; }
-    @top-right { content: none; }
-    @bottom-right { content: none; }
 }
 
 * { box-sizing: border-box; }
 
 html, body {
-    font-family: 'Inter', 'Helvetica', sans-serif;
-    font-size: 10.5pt;
+    font-family: 'Charter', 'Source Serif Pro', 'EB Garamond',
+                 Georgia, 'Times New Roman', serif;
+    font-size: 11pt;
     line-height: 1.55;
-    color: #1f2937;
-    margin: 0; padding: 0;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
 }
 
-/* ===== PORTADA ===== */
+/* PORTADA */
 .cover {
-    page: cover;
-    background: linear-gradient(135deg, #0a0e27 0%, #1e1140 50%, #0a0e27 100%);
-    color: #f5f7fa;
-    width: 100%;
-    min-height: 297mm;
-    padding: 30mm 22mm;
     page-break-after: always;
+    padding: 80mm 25mm 30mm 25mm;
+    min-height: 297mm;
     position: relative;
 }
-.cover::before {
-    content: "";
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 5mm;
-    background: linear-gradient(180deg, #00d4ff 0%, #ff0080 50%, #00ff88 100%);
+.cover .title {
+    font-family: 'Charter', 'Source Serif Pro', Georgia, serif;
+    font-size: 36pt;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 4mm 0;
+    color: #1a1a1a;
+    letter-spacing: -0.5pt;
 }
-.cover .kicker {
-    font-size: 11pt; color: #00d4ff;
-    letter-spacing: 3px; font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 18mm;
-}
-.cover h1 {
-    font-size: 56pt; line-height: 1; font-weight: 800;
-    margin: 0 0 4mm 0; color: #fff;
-}
-.cover .sub {
-    font-size: 22pt; color: #b8c0d0;
-    margin: 0 0 10mm 0; font-weight: 300;
+.cover .subtitle {
+    font-size: 16pt;
+    font-style: italic;
+    color: #444;
+    margin: 0 0 18mm 0;
+    font-weight: 400;
 }
 .cover .desc {
-    font-size: 11.5pt; color: #00d4ff;
+    font-size: 11pt;
     line-height: 1.6;
-    margin: 6mm 0 0 0; max-width: 150mm;
-    font-style: italic;
+    color: #333;
+    max-width: 140mm;
+    margin: 0 0 30mm 0;
 }
-.cover .meta {
-    position: absolute;
-    bottom: 30mm; left: 22mm;
-    color: #b8c0d0;
-}
-.cover .meta .name { font-size: 14pt; font-weight: 700; color: #fff; }
-.cover .meta .email { font-size: 10pt; color: #00d4ff; margin-top: 2mm; }
-.cover .meta .year { font-size: 9pt; color: #6b7280; margin-top: 4mm; }
-.cover .badges {
+.cover .author {
+    border-top: 0.5pt solid #888;
+    padding-top: 4mm;
     margin-top: 8mm;
-    display: flex; gap: 4mm;
+    max-width: 80mm;
 }
-.cover .badge {
-    background: #00d4ff; color: #0a0e27;
-    padding: 2mm 4mm; font-weight: 700;
-    font-size: 10pt; border-radius: 2mm;
+.cover .author .name {
+    font-size: 12pt;
+    font-weight: 700;
+    margin: 0;
 }
-.cover .badge.alt { background: #ff0080; color: #fff; }
-.cover .badge.alt2 { background: #00ff88; color: #0a0e27; }
+.cover .author .meta {
+    font-size: 9.5pt;
+    color: #555;
+    margin: 1mm 0 0 0;
+}
 
-/* ===== TOC ===== */
-.toc { page-break-after: always; }
+/* TOC */
+.toc {
+    page-break-after: always;
+}
 .toc h1 {
-    font-size: 28pt; font-weight: 800;
-    color: #0a0e27; margin: 0 0 8mm 0;
-    border-bottom: 3px solid #00aacc;
-    padding-bottom: 3mm;
+    font-family: 'Charter', Georgia, serif;
+    font-size: 22pt;
+    font-weight: 700;
+    margin: 0 0 10mm 0;
+    color: #1a1a1a;
+    border: none;
+    padding: 0;
+    page-break-before: avoid;
 }
-.toc-item {
-    display: flex; align-items: baseline;
-    margin-bottom: 2mm; padding: 1mm 0;
+.toc-line {
+    margin: 0 0 2mm 0;
+    line-height: 1.5;
 }
-.toc-item .num {
-    font-weight: 700; color: #00aacc;
-    width: 14mm; font-size: 11pt;
+.toc-line.h1 {
+    font-weight: 700;
+    margin-top: 4mm;
+    font-size: 11.5pt;
+    color: #1a1a1a;
 }
-.toc-item .title {
-    flex: 1; color: #1f2937;
-    font-size: 11pt;
+.toc-line.h2 {
+    padding-left: 10mm;
+    font-size: 10.5pt;
+    color: #333;
+    font-weight: 400;
 }
-.toc-item .page {
-    color: #6b7280; font-size: 10pt;
-}
-.toc-item.h2 { padding-left: 14mm; font-size: 10pt; }
-.toc-item.h2 .title { font-size: 10pt; color: #4b5563; }
-.toc-divider {
-    border-top: 1px solid #e5e7eb;
-    margin: 5mm 0;
+.toc-line .num {
+    display: inline-block;
+    min-width: 11mm;
+    color: #777;
+    font-variant-numeric: tabular-nums;
+    margin-right: 2mm;
 }
 
-/* ===== HEADINGS ===== */
+/* HEADINGS */
 h1 {
-    string-set: chapter-name content();
-    font-size: 26pt;
-    color: #0a0e27;
-    margin: 0 0 4mm 0;
-    font-weight: 800;
     page-break-before: always;
-    border-bottom: 4px solid;
-    border-image: linear-gradient(90deg, #00d4ff 0%, #ff0080 100%) 1;
-    padding-bottom: 3mm;
+    font-family: 'Charter', Georgia, serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 8mm 0;
+    padding-bottom: 4mm;
+    border-bottom: 0.5pt solid #1a1a1a;
+    line-height: 1.2;
 }
-h1.no-break { page-break-before: avoid; }
-
-h1 .chapter-num {
+h1 .num {
     display: block;
-    font-size: 11pt;
-    color: #00aacc;
-    letter-spacing: 3px;
+    font-size: 10pt;
+    font-weight: 400;
+    color: #777;
+    letter-spacing: 2pt;
     text-transform: uppercase;
     margin-bottom: 2mm;
-    font-weight: 700;
+    font-style: italic;
 }
+h1.nobreak { page-break-before: avoid; }
 
 h2 {
-    font-size: 18pt;
-    color: #0a0e27;
-    margin: 8mm 0 3mm 0;
+    font-family: 'Charter', Georgia, serif;
+    font-size: 15pt;
     font-weight: 700;
-    border-left: 4px solid #00aacc;
-    padding-left: 4mm;
+    margin: 8mm 0 3mm 0;
+    color: #1a1a1a;
     page-break-after: avoid;
+}
+h2 .num {
+    color: #999;
+    font-weight: 400;
+    margin-right: 3mm;
+    font-variant-numeric: tabular-nums;
 }
 
 h3 {
-    font-size: 13pt;
-    color: #1e1140;
+    font-family: 'Charter', Georgia, serif;
+    font-size: 12pt;
+    font-weight: 700;
     margin: 6mm 0 2mm 0;
-    font-weight: 700;
-    page-break-after: avoid;
-}
-h4 {
-    font-size: 11pt;
-    color: #4b5563;
-    margin: 4mm 0 1mm 0;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: #1a1a1a;
     page-break-after: avoid;
 }
 
+/* PARRAFOS */
 p {
     margin: 0 0 3mm 0;
     text-align: justify;
-    orphans: 3; widows: 3;
+    text-indent: 0;
+    orphans: 3;
+    widows: 3;
+    hyphens: auto;
 }
+
+p + p { text-indent: 4mm; }
+h1 + p, h2 + p, h3 + p, blockquote + p,
+.box + p, pre + p, table + p, ul + p, ol + p { text-indent: 0; }
 
 ul, ol {
     margin: 2mm 0 4mm 0;
     padding-left: 7mm;
 }
-li { margin-bottom: 1.5mm; }
-li > strong { color: #1e1140; }
+li {
+    margin-bottom: 1mm;
+    text-align: justify;
+}
 
-strong { color: #0a0e27; }
-em { color: #1e1140; }
-a { color: #00aacc; text-decoration: none; }
+strong { font-weight: 700; }
+em { font-style: italic; }
 
-/* ===== CÓDIGO ===== */
+a {
+    color: #1a1a1a;
+    text-decoration: underline;
+    text-underline-offset: 1.5px;
+}
+
+/* CÓDIGO */
 code {
-    font-family: 'Fira Code', 'Consolas', monospace;
-    background: #f3f4f6;
-    color: #be185d;
-    padding: 0.3mm 1.2mm;
-    border-radius: 1mm;
+    font-family: 'Iosevka', 'Source Code Pro', 'Consolas', monospace;
+    background: #f0f0f0;
+    color: #1a1a1a;
+    padding: 0 1mm;
     font-size: 9.5pt;
-    border: 1px solid #e5e7eb;
+    border-radius: 1pt;
 }
 
 pre {
-    background: #0d1020;
-    color: #f5f7fa;
-    padding: 4mm 5mm;
-    border-radius: 2mm;
-    border-left: 3mm solid #00aacc;
-    overflow: visible;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    padding: 3mm 4mm;
+    border-left: 2pt solid #1a1a1a;
     font-size: 9pt;
-    line-height: 1.5;
-    margin: 3mm 0 5mm 0;
+    line-height: 1.45;
+    margin: 3mm 0 4mm 0;
     page-break-inside: avoid;
-    position: relative;
+    overflow: visible;
 }
 pre code {
-    font-family: 'Fira Code', 'Consolas', monospace;
+    font-family: 'Iosevka', 'Source Code Pro', 'Consolas', monospace;
     background: transparent;
-    color: #f5f7fa;
+    color: #1a1a1a;
     padding: 0;
-    border: 0;
     font-size: 8.7pt;
     white-space: pre-wrap;
     word-break: break-word;
 }
 
-pre.bash { border-left-color: #00ff88; }
-pre.bash::before {
-    content: "BASH";
-    position: absolute;
-    top: 0; right: 0;
-    background: #00ff88; color: #0a0e27;
-    font-size: 7.5pt; font-weight: 800;
-    padding: 0.5mm 2mm;
-    border-radius: 0 2mm 0 2mm;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 1px;
-}
-pre.python { border-left-color: #00d4ff; }
-pre.python::before {
-    content: "PYTHON";
-    position: absolute;
-    top: 0; right: 0;
-    background: #00d4ff; color: #0a0e27;
-    font-size: 7.5pt; font-weight: 800;
-    padding: 0.5mm 2mm;
-    border-radius: 0 2mm 0 2mm;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 1px;
-}
-pre.yaml { border-left-color: #ff9500; }
-pre.yaml::before {
-    content: "YAML";
-    position: absolute;
-    top: 0; right: 0;
-    background: #ff9500; color: #0a0e27;
-    font-size: 7.5pt; font-weight: 800;
-    padding: 0.5mm 2mm;
-    border-radius: 0 2mm 0 2mm;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 1px;
-}
-pre.colang { border-left-color: #ff0080; }
-pre.colang::before {
-    content: "COLANG";
-    position: absolute;
-    top: 0; right: 0;
-    background: #ff0080; color: #fff;
-    font-size: 7.5pt; font-weight: 800;
-    padding: 0.5mm 2mm;
-    border-radius: 0 2mm 0 2mm;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 1px;
-}
-pre.output { border-left-color: #ffd600; background: #1a1d2e; }
-pre.output::before {
-    content: "OUTPUT";
-    position: absolute;
-    top: 0; right: 0;
-    background: #ffd600; color: #0a0e27;
-    font-size: 7.5pt; font-weight: 800;
-    padding: 0.5mm 2mm;
-    border-radius: 0 2mm 0 2mm;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 1px;
-}
-
-/* ===== BOXES ===== */
-.box {
-    border-radius: 2mm;
-    padding: 4mm 5mm;
-    margin: 4mm 0;
-    page-break-inside: avoid;
-}
-.box .label {
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 9pt;
-    letter-spacing: 1.5px;
-    margin-bottom: 2mm;
-}
-.box p:last-child { margin-bottom: 0; }
-
-.box.tip {
-    background: #ecfdf5; border-left: 4px solid #10b981;
-}
-.box.tip .label { color: #047857; }
-
-.box.warning {
-    background: #fef3c7; border-left: 4px solid #f59e0b;
-}
-.box.warning .label { color: #b45309; }
-
-.box.danger {
-    background: #fee2e2; border-left: 4px solid #ef4444;
-}
-.box.danger .label { color: #b91c1c; }
-
-.box.usecase {
-    background: #eff6ff; border-left: 4px solid #3b82f6;
-}
-.box.usecase .label { color: #1d4ed8; }
-
-.box.compare {
-    background: #faf5ff; border-left: 4px solid #a855f7;
-}
-.box.compare .label { color: #7e22ce; }
-
-/* ===== TOOL HEADER ===== */
-.tool-header {
-    background: linear-gradient(135deg, #0a0e27 0%, #1e1140 100%);
-    color: #fff;
-    padding: 5mm 6mm 4mm 6mm;
-    margin: 0 0 5mm 0;
-    border-radius: 2mm;
-    page-break-inside: avoid;
-    page-break-after: avoid;
-}
-.tool-header .kicker {
-    font-size: 9pt; color: #00d4ff;
-    letter-spacing: 2.5px; font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 2mm;
-}
-.tool-header h2 {
-    color: #fff !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 0 2mm 0 !important;
-    font-size: 22pt;
-}
-.tool-header .tagline {
-    color: #b8c0d0;
-    font-size: 11pt;
+/* No mostramos etiquetas de lenguaje en bloques de código.
+   Si en algún momento quieres mostrarlos, descomenta:
+pre[class]::before {
+    content: attr(class);
+    display: block;
+    font-family: 'Charter', Georgia, serif;
+    font-size: 8pt;
     font-style: italic;
-    margin: 0 0 3mm 0;
+    color: #777;
+    margin-bottom: 2mm;
+    text-transform: lowercase;
 }
-.tool-header .meta {
-    display: flex; gap: 3mm; flex-wrap: wrap;
+*/
+
+/* NOTAS estilo libro */
+.note {
+    border-left: 1.5pt solid #888;
+    padding: 0 0 0 5mm;
+    margin: 4mm 0;
+    color: #333;
+    font-size: 10.5pt;
+    font-style: italic;
+    page-break-inside: avoid;
 }
-.tool-header .meta .pill {
-    background: rgba(0, 212, 255, 0.18);
-    color: #00d4ff;
-    padding: 1mm 3mm;
-    border-radius: 3mm;
-    font-size: 9pt;
-    font-weight: 600;
+.note p {
+    text-align: left;
+    text-indent: 0;
+}
+.note strong {
+    font-style: normal;
 }
 
-/* ===== TABLE ===== */
+/* TABLA */
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 3mm 0 5mm 0;
-    font-size: 9.5pt;
+    font-size: 10pt;
     page-break-inside: avoid;
 }
 th {
-    background: #0a0e27;
-    color: #f5f7fa;
-    padding: 2.5mm 3mm;
     text-align: left;
+    border-bottom: 1.5pt solid #1a1a1a;
+    padding: 2mm 3mm 1.5mm 0;
     font-weight: 700;
-    font-size: 9pt;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 9.5pt;
+    color: #1a1a1a;
 }
 td {
-    padding: 2.5mm 3mm;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 0.5pt solid #ccc;
+    padding: 2mm 3mm 2mm 0;
     vertical-align: top;
-}
-tr:nth-child(even) td { background: #f9fafb; }
-
-/* ===== UTILS ===== */
-.lead {
-    font-size: 12pt;
-    color: #4b5563;
-    line-height: 1.65;
-    margin: 0 0 5mm 0;
-    border-left: 3px solid #00aacc;
-    padding-left: 4mm;
-    background: #f0f9ff;
-    padding: 3mm 4mm;
-    border-radius: 1mm;
+    color: #1a1a1a;
 }
 
-.muted { color: #6b7280; font-size: 9pt; }
-.hr { border: 0; border-top: 1px solid #e5e7eb; margin: 6mm 0; }
-
-.cols2 {
-    display: flex; gap: 5mm;
-    margin: 3mm 0;
+/* PROLOGO blockquote style */
+.epigraph {
+    margin: 6mm 12mm 8mm 12mm;
+    font-style: italic;
+    color: #444;
+    font-size: 11pt;
+    line-height: 1.5;
+    text-align: center;
 }
-.cols2 > * { flex: 1; }
-
-.callout-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3mm;
-    margin: 3mm 0;
-}
-.callout {
-    background: #f9fafb;
-    border-left: 3px solid #00aacc;
-    padding: 3mm 4mm;
-    border-radius: 0 2mm 2mm 0;
+.epigraph .src {
+    display: block;
+    text-align: right;
     font-size: 9.5pt;
+    color: #777;
+    margin-top: 2mm;
+    font-style: normal;
 }
-.callout strong { color: #0a0e27; }
 
-.kbd {
-    background: #1f2937; color: #f5f7fa;
-    font-family: 'Fira Code', monospace;
-    padding: 0.5mm 1.5mm;
-    border-radius: 1mm; font-size: 9pt;
+/* Cabecera de herramienta más sutil */
+.tool-meta {
+    font-size: 9pt;
+    color: #666;
+    margin: -4mm 0 4mm 0;
+    font-style: italic;
+}
+
+/* Fin de capítulo */
+.endmark {
+    text-align: center;
+    margin: 8mm 0;
+    color: #aaa;
+    font-size: 11pt;
+    letter-spacing: 6pt;
 }
