@@ -219,29 +219,100 @@ y se carga solo al entrar al directorio.
 
 <p>
 Ollama es la forma más cómoda de tener un modelo dando guerra en local.
-Lo levanto en Docker para no ensuciar el sistema y porque me gusta poder
-tirarlo y recrearlo.
+Hay dos formas de instalarlo: nativa, directamente en el sistema, o en
+Docker. Las dos funcionan; cada una tiene su momento.
 </p>
 
-<pre><code># Asegurate de que el daemon esta arrancado: docker ps debe responder
+<h3>Instalación nativa</h3>
+
+<p>
+Es la que recomiendo para máquinas dedicadas (tu portátil, una workstation,
+una VM Kali o Ubuntu para desarrollo). Menos capas, menos sorpresas, menos
+RAM gastada en virtualización. El script oficial funciona en cualquier
+distro basada en Debian o RHEL:
+</p>
+
+<pre><code># Instalacion oficial (Linux y macOS)
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Verifica
+ollama --version
+
+# En Linux con systemd, el instalador crea un servicio:
+systemctl status ollama
+# Si no esta corriendo:
+sudo systemctl start ollama
+sudo systemctl enable ollama   # arranque automatico
+
+# Si tu sistema no tiene systemd (Kali sin init, contenedores, etc.):
+ollama serve &amp;                 # arranca en background
+
+# Comprueba que responde
+curl -s http://localhost:11434/api/tags</code></pre>
+
+<p>
+En Kali Linux (que es Debian-based), la línea de <code>curl ... | sh</code>
+funciona sin modificaciones. Si trabajas como <code>root</code> en la VM,
+quita los <code>sudo</code> de los comandos. Si el script falla por
+problemas de TLS o certificados, instala primero los CA:
+</p>
+
+<pre><code>sudo apt update
+sudo apt install -y ca-certificates curl
+curl -fsSL https://ollama.com/install.sh | sh</code></pre>
+
+<p>
+Si por la razón que sea el script no te funciona, instala el binario a
+pelo:
+</p>
+
+<pre><code>sudo curl -L https://ollama.com/download/ollama-linux-amd64 \
+     -o /usr/local/bin/ollama
+sudo chmod +x /usr/local/bin/ollama
+ollama serve &amp;
+# Y descarga modelos con: ollama pull &lt;nombre&gt;</code></pre>
+
+<h3>Instalación en Docker</h3>
+
+<p>
+La uso cuando quiero aislar la instalación (proyectos efímeros, CI, máquinas
+donde no quiero ensuciar el sistema). En una VM Kali no merece la pena: la
+VM ya es tu sandbox.
+</p>
+
+<pre><code># Asegurate de que el daemon esta arrancado:
+docker ps      # debe listar contenedores, no dar 'cannot connect'
+
 # Linux puro:  sudo systemctl start docker
 # Mac/Win:     abre Docker Desktop
 
-# Uso siempre el nombre totalmente cualificado de la imagen (docker.io/...).
-# Asi el comando funciona igual en Docker, Podman o entornos con
-# short-name-mode = "enforcing" (algunas distros RHEL/Fedora).
+# Uso siempre el nombre completo de la imagen (docker.io/...).
+# Asi funciona igual en Docker, Podman, podman-docker, y entornos con
+# short-name-mode = "enforcing" en RHEL/Fedora.
 
 docker run -d --name ollama \
   -p 11434:11434 \
   -v ollama:/root/.ollama \
   docker.io/ollama/ollama
 
-# Si tienes GPU NVIDIA, anade --gpus=all
+# Si tienes GPU NVIDIA en el host, anade --gpus=all
+# Si estas en una VM sin GPU passthrough, no pongas ese flag</code></pre>
 
-# Modelos que uso de manera recurrente:
-docker exec ollama ollama pull llama3:8b           # general
-docker exec ollama ollama pull phi3:mini           # rapido para iterar
-docker exec ollama ollama pull llama-guard3:8b     # clasificador defensivo
+<h3>Descargar modelos</h3>
+
+<p>
+Una vez Ollama responde, los modelos se descargan iguales tanto en
+instalación nativa como en Docker. La única diferencia es el prefijo
+<code>docker exec ollama</code> si lo metiste en contenedor:
+</p>
+
+<pre><code># Nativo
+ollama pull llama3:8b           # general, 4.7 GB
+ollama pull phi3:mini           # rapido para iterar, 2.3 GB
+ollama pull llama-guard3:8b     # clasificador defensivo, 5.4 GB
+
+# En Docker (mismo modelo, distinto prefijo)
+docker exec ollama ollama pull phi3:mini
 
 # Comprueba que responde
 curl -s http://localhost:11434/api/generate -d '{
@@ -251,7 +322,13 @@ curl -s http://localhost:11434/api/generate -d '{
 <p>
 Cada modelo ocupa entre 2 y 5 GB en disco y otros tantos en RAM cuando
 está cargado. Si tu portátil tiene 16 GB de RAM, no cargues dos a la vez.
+En una VM con 4-8 GB asignados, quédate con <code>phi3:mini</code> y
+suficiente.
 </p>
+
+<div class="note"><p>Sin GPU, <code>phi3:mini</code> tarda 5-15 segundos por respuesta;
+<code>llama3:8b</code> puede tardar 30-90 segundos. Para iterar payloads
+durante el workshop, el primero es perfectamente usable.</p></div>
 
 <h2><span class="num">1.6</span>Comprobación rápida</h2>
 
