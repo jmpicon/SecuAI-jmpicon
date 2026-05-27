@@ -1,0 +1,33 @@
+#EXTM3U
+#PLAYLIST: SecuAI - Manual de Herramientas
+
+#EXTINF:-1,Prólogo
+00_prologo.mp3
+#EXTINF:-1,Cap. 1 - Setup
+01_setup.mp3
+#EXTINF:-1,Cap. 2 - Introducción ataque
+02_intro_ataque.mp3
+#EXTINF:-1,Cap. 2.1 - Garak
+03_garak.mp3
+#EXTINF:-1,Cap. 2.2 - PyRIT
+04_pyrit.mp3
+#EXTINF:-1,Cap. 2.3 - Promptfoo
+05_promptfoo.mp3
+#EXTINF:-1,Cap. 2.4 - TextAttack
+06_textattack.mp3
+#EXTINF:-1,Cap. 2.5 - ART
+07_art.mp3
+#EXTINF:-1,Cap. 2.6-2.7
+08_harmbench_counterfit.mp3
+#EXTINF:-1,Cap. 3.1 - LLM Guard
+09_llmguard.mp3
+#EXTINF:-1,Cap. 3.2-3.3
+10_nemo_llamaguard.mp3
+#EXTINF:-1,Cap. 3.4-3.7
+11_rebuff_vigil_presidio.mp3
+#EXTINF:-1,Cap. 4 - Supply chain
+12_supply_chain.mp3
+#EXTINF:-1,Cap. 5 - End to end
+13_end_to_end.mp3
+#EXTINF:-1,Cap. 6 - Diez horas
+14_diez_horas.mp3
