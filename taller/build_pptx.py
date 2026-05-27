@@ -234,7 +234,7 @@ add_qr(s, "repo", SW - Inches(3.5), Inches(2.0), size_in=2.5,
        label="REPO COMPLETO", url_hint="github.com/jmpicon/SecuAI-jmpicon")
 
 add_text(s, Inches(0.8), Inches(5.95), Inches(8), Inches(0.4),
-         "José Picón · jose.bobal@gmail.com",
+         "José Picón · jmpicon@jmpicon.com",
          size=14, bold=True, color=WHITE)
 add_text(s, Inches(0.8), Inches(6.3), Inches(8), Inches(0.4),
          "Curso especialización · Ciberseguridad · ENS 2025/26",
@@ -1717,7 +1717,7 @@ add_text(s, Inches(0.85), Inches(2.7), Inches(7.5), Inches(0.4),
          size=14, color=GREY_HI, italic=True)
 
 contacts = [
-    ("✉",  "jose.bobal@gmail.com"),
+    ("✉",  "jmpicon@jmpicon.com"),
     ("🐙", "github.com/jmpicon"),
     ("🔗", "linkedin.com/in/jmpicon"),
     ("🌐", "github.com/jmpicon/SecuAI-jmpicon"),
@@ -1751,7 +1751,7 @@ add_qr(s, "repo", SW - Inches(2.8), Inches(5.0), 1.8, label="REPO",
        label_size=10)
 
 add_text(s, Inches(0.55), Inches(6.6), Inches(12), Inches(0.4),
-         "José Picón  ·  jose.bobal@gmail.com  ·  SecuAI 2026",
+         "José Picón  ·  jmpicon@jmpicon.com  ·  SecuAI 2026",
          size=13, color=GREY)
 add_footer(s, P())
 add_notes(s, """Deja la pantalla aquí durante el Q&A. El QR del repo siempre visible.

@@ -162,7 +162,7 @@ Inspirado en el proyecto hermano **CursoPPS** (Puesta en Producción Segura).
 
 Las herramientas y papers mencionados pertenecen a sus respectivos autores; ver `bibliografia.md` de cada módulo.
 
-Contacto: jose.bobal@gmail.com
+Contacto: jmpicon@jmpicon.com
 
 ---
 

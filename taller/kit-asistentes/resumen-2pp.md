@@ -95,4 +95,4 @@ Sanciones EU AI Act: hasta **35M€ o 7% turnover** por violar prohibiciones.
 
 ---
 
-**Contacto del ponente**: jose.bobal@gmail.com · José Picón (jmpicon)
+**Contacto del ponente**: jmpicon@jmpicon.com · José Picón (jmpicon)

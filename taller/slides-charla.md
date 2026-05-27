@@ -263,7 +263,7 @@ QR:
 - Repo curso completo (10 módulos + labs + slides).
 - Bibliografía.
 
-📧 jose.bobal@gmail.com
+📧 jmpicon@jmpicon.com
 🔗 jmpicon
 
 ---

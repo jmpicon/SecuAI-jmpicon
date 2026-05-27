@@ -126,4 +126,4 @@ Aplica la receta al asistente **"AyudaLegal"**
 
 ## Preguntas
 
-`jose.bobal@gmail.com`
+`jmpicon@jmpicon.com`
