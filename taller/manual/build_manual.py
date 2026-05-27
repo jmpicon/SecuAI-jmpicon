@@ -246,13 +246,24 @@ Lo levanto en Docker para no ensuciar el sistema y porque me gusta poder
 tirarlo y recrearlo.
 </p>
 
-""" + code("""docker run -d --name ollama -p 11434:11434 -v ollama:/root/.ollama ollama/ollama
+""" + code("""# Asegurate de que el daemon esta arrancado: docker ps debe responder
+# Linux puro:  sudo systemctl start docker
+# Mac/Win:     abre Docker Desktop
 
-# Si tienes GPU NVIDIA, añade --gpus=all
+# Uso siempre el nombre totalmente cualificado de la imagen (docker.io/...).
+# Asi el comando funciona igual en Docker, Podman o entornos con
+# short-name-mode = "enforcing" (algunas distros RHEL/Fedora).
+
+docker run -d --name ollama \\
+  -p 11434:11434 \\
+  -v ollama:/root/.ollama \\
+  docker.io/ollama/ollama
+
+# Si tienes GPU NVIDIA, anade --gpus=all
 
 # Modelos que uso de manera recurrente:
 docker exec ollama ollama pull llama3:8b           # general
-docker exec ollama ollama pull phi3:mini           # rápido para iterar
+docker exec ollama ollama pull phi3:mini           # rapido para iterar
 docker exec ollama ollama pull llama-guard3:8b     # clasificador defensivo
 
 # Comprueba que responde
@@ -2073,6 +2084,26 @@ arrancarlo en Docker. Si tu script falla con
 <code>connection refused</code> justo después del <code>docker run</code>,
 no es bug: es la espera. Mete un <code>sleep 30</code> en el script
 o un retry con backoff.
+</p>
+
+<p>
+<strong><code>Error: short-name "ollama/ollama"</code> al hacer
+<code>docker run</code>.</strong> Pasa con Podman (o <code>podman-docker</code>
+emulando <code>docker</code>) y con algunas distros RHEL/Fedora que tienen
+<code>short-name-mode = "enforcing"</code> en
+<code>/etc/containers/registries.conf</code>. La solución es usar el nombre
+totalmente cualificado de la imagen:
+<code>docker.io/ollama/ollama</code> en lugar de <code>ollama/ollama</code>.
+Yo lo pongo siempre así por costumbre — funciona en Docker, Podman y
+cualquier runtime estricto, y solo añade siete caracteres al comando.
+</p>
+
+<p>
+<strong><code>cannot connect to docker daemon at /var/run/docker.sock</code>.</strong>
+El daemon no está arrancado. En Linux: <code>sudo systemctl start
+docker</code>. En Mac/Windows: abre Docker Desktop y espera a que la ballena
+diga «running». Si el problema persiste tras arrancarlo, comprueba que tu
+usuario está en el grupo <code>docker</code> (siguiente nota).
 </p>
 
 <p>

@@ -622,7 +622,9 @@ add_subtitle(s, "Si quieres trabajar 100% offline o sin coste.")
 
 add_terminal(s, Inches(0.55), Inches(2.15), Inches(12.2), Inches(2.6), [
     ("#", "Levanta Ollama en docker"),
-    ("$", "docker run -d --name ollama -p 11434:11434 -v ollama:/root/.ollama ollama/ollama"),
+    ("#", "Usa el nombre completo (docker.io/...) para evitar 'short-name'"),
+    ("$", "docker run -d --name ollama -p 11434:11434 \\"),
+    ("",  "  -v ollama:/root/.ollama docker.io/ollama/ollama"),
     ("", ""),
     ("#", "Descarga modelos ligeros (4-8 GB cada uno)"),
     ("$", "docker exec ollama ollama pull llama3:8b"),
